@@ -3,163 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LED Лампочки 9W – Акція 499 грн</title>
+<title>LED Лампочки 9W — Оплата при отриманні</title>
 
 <style>
-body{font-family:Arial;background:#f5f5f5;margin:0;padding:0;color:#222;}
-.container{max-width:900px;margin:auto;background:#fff;padding:20px;}
-h1,h2{text-align:center;}
-
-/* Банер акції */
-.sale-banner {
-  background: linear-gradient(45deg, #ff0000, #ff7b00);
-  color: #fff;
-  padding: 12px 20px;
-  text-align: center;
-  font-size: 26px;
-  font-weight: bold;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  animation: pulse 1.5s infinite;
-}
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.06); }
-  100% { transform: scale(1); }
-}
-
-/* Галерея */
-.gallery{display:flex;flex-direction:column;align-items:center;}
-.gallery-main{width:90%;max-width:400px;border-radius:10px;margin-bottom:10px;}
-.gallery-row{display:flex;gap:10px;}
-.gallery-thumb{width:48%;border-radius:10px;}
-
-/* Кнопки */
-.btn{display:block;width:90%;margin:20px auto;padding:15px;background:#ff7a00;color:#fff;text-align:center;
-font-size:22px;border-radius:10px;text-decoration:none;}
-
-/* Відгуки */
-.review{background:#f8f8f8;padding:15px;border-radius:10px;margin-bottom:15px;}
-.star-anim {color:#ff9800;font-size:22px;animation: shine 1.6s infinite alternate ease-in-out;}
-@keyframes shine {
-  0% { opacity:0.5; transform:scale(1); }
-  100% { opacity:1; transform:scale(1.15); }
-}
+body{margin:0;font-family:Arial;background:#f4f4f4}
+.container{max-width:900px;margin:auto;background:#fff;padding:20px}
+h1,h2{text-align:center}
+.sale-banner{background:#ff3b3b;color:#fff;font-size:26px;padding:15px;border-radius:12px;text-align:center;margin-bottom:20px}
+.gallery{text-align:center}
+.gallery img{width:90%;max-width:420px;border-radius:12px;margin:10px 0}
+.btn{background:#ff7a00;color:#fff;font-size:22px;padding:16px;border:none;border-radius:12px;width:100%}
+.order-form{display:flex;flex-direction:column;gap:12px}
+.order-form input{padding:14px;font-size:18px;border-radius:10px;border:1px solid #ccc}
+.success{display:none;color:green;text-align:center;font-size:20px}
 </style>
-
 </head>
-<body>
 
+<body>
 <div class="container">
 
-<h1>LED Лампочки 9W – Набір 2 шт</h1>
+<h1>LED Лампочки 9W — Набір 2 шт</h1>
+<div class="sale-banner">🔥 АКЦІЯ -50% • ЦІНА 499 грн 🔥</div>
 
-<div class="sale-banner">🔥 АКЦІЯ! -50% ТІЛЬКИ СЬОГОДНІ 🔥</div>
-
-<!-- Галерея -->
 <div class="gallery">
-  <img src="images/cropped_2.png" class="gallery-main">
-  <div class="gallery-row">
-    <img src="images/cropped_0.png" class="gallery-thumb">
-    <img src="images/cropped_1.png" class="gallery-thumb">
-  </div>
+  <img src="images/cropped_2.png">
 </div>
 
-<p style="text-align:center;font-size:26px;color:#e63946;">🔥 Акційна ціна: 499 грн</p>
+<h2>Оформити замовлення</h2>
 
-<a href="https://next.privat24.ua/money-transfer/card/4441111050997471?amount=499" class="btn">Оплатити 499 грн</a>
+<form id="orderForm" class="order-form">
+  <input name="phone" placeholder="Ваш мобільний номер" required>
+  <input name="city" placeholder="Місто" required>
+  <input name="np" placeholder="Відділення Нової Пошти" required>
+  <button class="btn">Замовити з оплатою при отриманні</button>
+</form>
 
-<!-- Таймер акції -->
-<div style="text-align:center; margin:35px 0;">
-  <h2>До кінця акції залишилось:</h2>
-  <div id="timer" style="font-size:32px; font-weight:bold; color:#e63946;"></div>
-</div>
-
-<hr>
-
-<h2>Опис</h2>
-<p>
-LED лампочки 9W E27 — яскраві, економні та довговічні.  
-Підходять для дому, офісу, гаража та аварійного освітлення.  
-Майже не нагріваються, світять як 60W.
-</p>
-
-<!-- Чому купують у нас -->
-<h2 style="margin-top:40px;">Чому купують у нас?</h2>
-
-<div style="display:flex; flex-direction:column; gap:15px;">
-
-  <div style="background:#f8f8f8; padding:15px; border-radius:10px;">
-    <strong>🔋 Надійна якість</strong>
-    <p>Перевірені лампочки з довгим терміном служби — працюють стабільно у будь-яких умовах.</p>
-  </div>
-
-  <div style="background:#f8f8f8; padding:15px; border-radius:10px;">
-    <strong>⚡ Дуже яскраве світло</strong>
-    <p>9W LED дає світло як 60W — ідеально для дому, офісу та гаража.</p>
-  </div>
-
-  <div style="background:#f8f8f8; padding:15px; border-radius:10px;">
-    <strong>💳 Зручна оплата</strong>
-    <p>Миттєва оплата через Privat24 — швидко та безпечно.</p>
-  </div>
-
-  <div style="background:#f8f8f8; padding:15px; border-radius:10px;">
-    <strong>🚚 Швидка доставка</strong>
-    <p>Відправка день-в-день Новою Поштою.</p>
-  </div>
+<div id="success" class="success">✅ Замовлення прийнято</div>
 
 </div>
 
-<!-- Відгуки покупців -->
-<h2 style="margin-top:40px;">Відгуки покупців</h2>
-
-<div class="review">
-  <div class="star-anim">★★★★★</div>
-  <p><strong>Олена М.</strong></p>
-  <p>Лампочки дуже яскраві, замовила для кухні — результат супер. Економні, рекомендую!</p>
-</div>
-
-<div class="review">
-  <div class="star-anim">★★★★★</div>
-  <p><strong>Андрій Т.</strong></p>
-  <p>Якість на рівні, світять навіть в аварійному режимі. В гаражі просто топ!</p>
-</div>
-
-<div class="review">
-  <div class="star-anim">★★★★★</div>
-  <p><strong>Марія К.</strong></p>
-  <p>Швидка доставка, лампи якісні. Замовляла для батьків — задоволені.</p>
-</div>
-
-<div class="review">
-  <div class="star-anim">★★★★★</div>
-  <p><strong>Петро Л.</strong></p>
-  <p>Не мерехтять, світло рівне. За ці гроші — супер купівля!</p>
-</div>
-
-</div>
-
-<!-- Скрипт таймера -->
 <script>
-function startTimer(duration, display) {
-    let timer = duration, hours, minutes, seconds;
-    setInterval(function () {
-        hours = String(parseInt(timer / 3600)).padStart(2,'0');
-        minutes = String(parseInt((timer % 3600) / 60)).padStart(2,'0');
-        seconds = String(timer % 60).padStart(2,'0');
-
-        display.textContent = hours + ":" + minutes + ":" + seconds;
-
-        if (--timer < 0) { timer = duration; }
-    }, 1000);
-}
-window.onload = function () {
-    const threeHours = 60 * 60 * 3;
-    const display = document.querySelector('#timer');
-    startTimer(threeHours, display);
-};
+document.getElementById("orderForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  fetch("PASTE_YOUR_SCRIPT_URL_HERE", {
+    method:"POST",
+    body:JSON.stringify({
+      phone:this.phone.value,
+      city:this.city.value,
+      np:this.np.value,
+      product:"LED Лампочки 9W",
+      price:"499 грн",
+      payment:"Оплата при отриманні"
+    })
+  }).then(()=> {
+    this.reset();
+    document.getElementById("success").style.display="block";
+  });
+});
 </script>
 
 </body>
-</html>  
+</html>

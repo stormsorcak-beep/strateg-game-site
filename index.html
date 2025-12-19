@@ -4,30 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LED Лампочка — Замовлення</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background: #f2f2f2;
       margin: 0;
       padding: 0;
     }
+
     .container {
       max-width: 420px;
       background: #fff;
       margin: 30px auto;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
+
     h1 {
       text-align: center;
-      color: #222;
+      margin-bottom: 10px;
     }
+
     p {
       text-align: center;
       color: #555;
     }
-    input, button {
+
+    .price {
+      text-align: center;
+      font-size: 22px;
+      color: #d32f2f;
+      margin: 15px 0;
+      font-weight: bold;
+    }
+
+    input {
       width: 100%;
       padding: 12px;
       margin: 8px 0;
@@ -35,82 +48,99 @@
       border: 1px solid #ccc;
       font-size: 16px;
     }
+
     button {
-      background: #28a745;
-      color: white;
+      width: 100%;
+      padding: 14px;
+      background: #2e7d32;
+      color: #fff;
+      font-size: 18px;
       border: none;
-      font-weight: bold;
+      border-radius: 8px;
       cursor: pointer;
+      margin-top: 10px;
     }
+
     button:hover {
-      background: #218838;
+      background: #256628;
     }
-    .success {
-      display: none;
-      margin-top: 15px;
-      padding: 12px;
-      background: #d4edda;
-      color: #155724;
-      border-radius: 6px;
+
+    .note {
       text-align: center;
-    }
-    .price {
-      font-size: 22px;
-      color: #e63946;
-      font-weight: bold;
-      text-align: center;
-      margin: 10px 0;
+      font-size: 13px;
+      color: #777;
+      margin-top: 10px;
     }
   </style>
 </head>
+
 <body>
 
-  <div class="container">
-    <h1>💡 LED Лампочка</h1>
-    <p>Економна • Яскрава • Надійна</p>
-    <div class="price">Ціна: 299 грн</div>
+<div class="container">
+  <h1>💡 LED Лампочка</h1>
+  <p>Яскрава • Економна • Надійна</p>
 
-    <form id="orderForm">
-      <input type="text" id="name" placeholder="Ваше імʼя" required>
-      <input type="tel" id="phone" placeholder="Телефон" required>
-      <input type="text" id="city" placeholder="Місто" required>
-      <input type="text" id="post" placeholder="Відділення Нової Пошти" required>
+  <div class="price">Ціна: 299 грн</div>
 
-      <button type="submit">🛒 Замовити (оплата при отриманні)</button>
-    </form>
+  <input id="name" type="text" placeholder="Ваше імʼя" required>
+  <input id="phone" type="tel" placeholder="Телефон (09XXXXXXXX)" required>
+  <input id="city" type="text" placeholder="Місто" required>
+  <input id="post" type="text" placeholder="Нова Пошта (№ відділення)" required>
 
-    <div class="success" id="successMessage">
-      ✅ Дякуємо! Замовлення прийнято. Ми зателефонуємо вам найближчим часом.
-    </div>
+  <button onclick="submitOrder()">🛒 Замовити (оплата при отриманні)</button>
+
+  <div class="note">
+    Оплата при отриманні • Доставка Новою Поштою
   </div>
+</div>
 
-  <script>
-    const form = document.getElementById('orderForm');
-    const successMessage = document.getElementById('successMessage');
+<script>
+async function submitOrder() {
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const city = document.getElementById("city").value.trim();
+  const post = document.getElementById("post").value.trim();
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
+  if (!name || !phone || !city || !post) {
+    alert("❗ Заповніть всі поля");
+    return;
+  }
 
-      const data = {
-        name: document.getElementById('name').value,
-        phone: document.getElementById('phone').value,
-        city: document.getElementById('city').value,
-        post: document.getElementById('post').value
-      };
+  try {
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbwBINSDcDJims8yJVwsyh3OhQHLX8mKgi64L7FmSk971r55HiR2ZbdAc6DRxf5zSr5cfA/exec",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: name,
+          phone: phone,
+          city: city,
+          post: post
+        })
+      }
+    );
 
-      fetch('https://script.google.com/macros/s/AKfycbwBINSDcDJims8yJVwsyh3OhQHLX8mKgi64L7FmSk971r55HiR2ZbdAc6DRxf5zSr5cfA/exec', {
-        method: 'POST',
-        body: JSON.stringify(data)
-      })
-      .then(() => {
-        form.reset();
-        successMessage.style.display = 'block';
-      })
-      .catch(() => {
-        alert('Помилка відправки. Спробуйте ще раз.');
-      });
-    });
-  </script>
+    const result = await response.json();
+
+    if (result.status === "success") {
+      alert("✅ Замовлення прийнято! Ми зателефонуємо вам.");
+      document.getElementById("name").value = "";
+      document.getElementById("phone").value = "";
+      document.getElementById("city").value = "";
+      document.getElementById("post").value = "";
+    } else {
+      alert("❌ Помилка сервера");
+    }
+
+  } catch (error) {
+    alert("❌ Помилка відправки. Спробуйте ще раз.");
+    console.error(error);
+  }
+}
+</script>
 
 </body>
 </html>

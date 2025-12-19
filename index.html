@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LED Лампочка — замовлення</title>
+  <title>LED Лампочка — Замовлення</title>
 
   <style>
     body {
@@ -12,7 +12,6 @@
       margin: 0;
       padding: 0;
     }
-
     .container {
       max-width: 420px;
       background: #fff;
@@ -21,39 +20,29 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
     h1 {
       text-align: center;
     }
-
     .price {
       text-align: center;
-      font-size: 22px;
       color: red;
-      margin-bottom: 15px;
+      font-size: 22px;
+      margin-bottom: 20px;
     }
-
     input, button {
       width: 100%;
       padding: 12px;
-      margin: 8px 0;
-      font-size: 16px;
+      margin-bottom: 10px;
       border-radius: 6px;
       border: 1px solid #ccc;
+      font-size: 16px;
     }
-
     button {
       background: green;
-      color: white;
-      font-size: 18px;
+      color: #fff;
+      font-weight: bold;
       border: none;
-      cursor: pointer;
     }
-
-    button:disabled {
-      background: gray;
-    }
-
     .success {
       display: none;
       text-align: center;
@@ -61,18 +50,10 @@
       font-weight: bold;
       margin-top: 15px;
     }
-
-    .error {
-      display: none;
-      text-align: center;
-      color: red;
-      font-weight: bold;
-      margin-top: 15px;
-    }
   </style>
 </head>
-<body>
 
+<body>
   <div class="container">
     <h1>💡 LED Лампочка</h1>
     <div class="price">Ціна: 299 грн</div>
@@ -82,54 +63,33 @@
     <input id="city" placeholder="Місто">
     <input id="post" placeholder="Відділення Нової Пошти">
 
-    <button id="btn" onclick="sendOrder()">Замовити (оплата при отриманні)</button>
+    <button onclick="sendOrder()">Замовити (оплата при отриманні)</button>
 
     <div class="success" id="success">✅ Замовлення прийнято!</div>
-    <div class="error" id="error">❌ Помилка. Спробуйте ще раз</div>
   </div>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwBINSDcDJims8yJVwsyh3OhQHLX8mKgi64L7FmSk971r55HiR2ZbdAc6DRxf5zSr5cfA/exec";
-
 function sendOrder() {
-  const name = document.getElementById("name").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const city = document.getElementById("city").value.trim();
-  const post = document.getElementById("post").value.trim();
+  const data = {
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    city: document.getElementById("city").value,
+    post: document.getElementById("post").value
+  };
 
-  if (!name || !phone || !city || !post) {
-    alert("Заповніть всі поля");
-    return;
-  }
-
-  document.getElementById("btn").disabled = true;
-
-  fetch(SCRIPT_URL, {
+  fetch("https://script.google.com/macros/s/AKfycbwBINSDcDJims8yJVwsyh3OhQHLX8mKgi64L7FmSk971r55HiR2ZbdAc6DRxf5zSr5cfA/exec", {
     method: "POST",
-    mode: "no-cors",
+    body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      name: name,
-      phone: phone,
-      city: city,
-      post: post
-    })
+    }
   })
+  .then(res => res.json())
   .then(() => {
     document.getElementById("success").style.display = "block";
-    document.getElementById("error").style.display = "none";
-    document.getElementById("btn").disabled = false;
-
-    document.getElementById("name").value = "";
-    document.getElementById("phone").value = "";
-    document.getElementById("city").value = "";
-    document.getElementById("post").value = "";
   })
   .catch(() => {
-    document.getElementById("error").style.display = "block";
-    document.getElementById("btn").disabled = false;
+    alert("Помилка відправки");
   });
 }
 </script>

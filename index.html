@@ -1,95 +1,161 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LED Лампочка — Замовлення</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LED лампа з акумулятором 9W</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 420px;
-      background: #fff;
-      margin: 30px auto;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-    }
-    .price {
-      text-align: center;
-      color: red;
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
-    input, button {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
-    button {
-      background: green;
-      color: #fff;
-      font-weight: bold;
-      border: none;
-    }
-    .success {
-      display: none;
-      text-align: center;
-      color: green;
-      font-weight: bold;
-      margin-top: 15px;
-    }
-  </style>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f3f3;
+  color: #222;
+}
+.container {
+  max-width: 420px;
+  margin: auto;
+  background: #ffffff;
+}
+img {
+  width: 100%;
+}
+.header {
+  padding: 20px;
+  text-align: center;
+}
+.header h1 {
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+.price {
+  font-size: 26px;
+  color: #d32f2f;
+  font-weight: bold;
+}
+.block {
+  padding: 20px;
+}
+.block h2 {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+ul {
+  padding-left: 18px;
+}
+form {
+  padding: 20px;
+}
+input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+button {
+  width: 100%;
+  padding: 16px;
+  background: #1976d2;
+  color: #fff;
+  font-size: 17px;
+  border: none;
+  border-radius: 8px;
+}
+.trust {
+  background: #f7f7f7;
+  padding: 15px;
+  font-size: 14px;
+}
+.footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 13px;
+  color: #777;
+}
+</style>
 </head>
 
 <body>
-  <div class="container">
-    <h1>💡 LED Лампочка</h1>
-    <div class="price">Ціна: 299 грн</div>
 
-    <input id="name" placeholder="Ваше імʼя">
-    <input id="phone" placeholder="Телефон">
-    <input id="city" placeholder="Місто">
-    <input id="post" placeholder="Відділення Нової Пошти">
+<div class="container">
 
-    <button onclick="sendOrder()">Замовити (оплата при отриманні)</button>
+<img src="https://i.imgur.com/8WZ6w5p.jpg" alt="LED лампа">
 
-    <div class="success" id="success">✅ Замовлення прийнято!</div>
-  </div>
+<div class="header">
+  <h1>LED лампа 9W з вбудованим акумулятором</h1>
+  <p>Працює як звичайна лампа та світить під час відключення електроенергії</p>
+  <div class="price">399 грн / 2 шт</div>
+</div>
+
+<div class="block">
+  <h2>Основні характеристики</h2>
+  <ul>
+    <li>Потужність: 9W</li>
+    <li>Цоколь: E27</li>
+    <li>Вбудований акумулятор</li>
+    <li>Автоматичне вмикання при зникненні світла</li>
+    <li>Ресурс до 30 000 годин</li>
+  </ul>
+</div>
+
+<div class="block">
+  <h2>Як використовується</h2>
+  <p>
+    Лампа вкручується у стандартний патрон E27. 
+    Під час роботи від мережі акумулятор заряджається.
+    При зникненні електропостачання лампа продовжує світити від акумулятора.
+  </p>
+</div>
+
+<div class="block">
+  <h2>Залишити заявку</h2>
+  <p>Менеджер звʼяжеться з вами для підтвердження замовлення</p>
+</div>
+
+<form onsubmit="sendTelegram(); return false;">
+  <input type="text" id="name" placeholder="Ваше імʼя" required>
+  <input type="tel" id="phone" placeholder="Контактний телефон" required>
+  <button type="submit">Залишити заявку</button>
+</form>
+
+<div class="trust">
+  ✔️ Доставка по Україні<br>
+  ✔️ Оплата при отриманні<br>
+  ✔️ Перевірка товару перед оплатою
+</div>
+
+<div class="footer">
+  Інформація на сайті не є публічною офертою
+</div>
+
+</div>
 
 <script>
-function sendOrder() {
-  const data = {
-    name: document.getElementById("name").value,
-    phone: document.getElementById("phone").value,
-    city: document.getElementById("city").value,
-    post: document.getElementById("post").value
-  };
+function sendTelegram() {
+  var name = document.getElementById('name').value;
+  var phone = document.getElementById('phone').value;
 
-  fetch("https://script.google.com/macros/s/AKfycbwBINSDcDJims8yJVwsyh3OhQHLX8mKgi64L7FmSk971r55HiR2ZbdAc6DRxf5zSr5cfA/exec", {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  .then(res => res.json())
-  .then(() => {
-    document.getElementById("success").style.display = "block";
-  })
-  .catch(() => {
-    alert("Помилка відправки");
+  var text =
+`🟦 FB ЗАЯВКА
+
+👤 Імʼя: ${name}
+📞 Телефон: ${phone}
+💡 LED лампа 9W
+💰 399 грн / 2 шт`;
+
+  var token = "8298483323:AAFt2eWhFACEBpFYsqBdf2VHHweGS69w-eY";
+  var chat_id = "2101279913";
+
+  var url = "https://api.telegram.org/bot" + token +
+            "/sendMessage?chat_id=" + chat_id +
+            "&text=" + encodeURIComponent(text);
+
+  fetch(url).then(() => {
+    alert("Дякуємо! Ми звʼяжемося з вами найближчим часом.");
+    document.getElementById('name').value = "";
+    document.getElementById('phone').value = "";
   });
 }
 </script>

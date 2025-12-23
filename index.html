@@ -19,6 +19,7 @@ body {
 }
 img {
   width: 100%;
+  display: block;
 }
 .header {
   padding: 20px;
@@ -101,15 +102,6 @@ button {
 </div>
 
 <div class="block">
-  <h2>Як використовується</h2>
-  <p>
-    Лампа вкручується у стандартний патрон E27. 
-    Під час роботи від мережі акумулятор заряджається.
-    При зникненні електропостачання лампа продовжує світити від акумулятора.
-  </p>
-</div>
-
-<div class="block">
   <h2>Залишити заявку</h2>
   <p>Менеджер звʼяжеться з вами для підтвердження замовлення</p>
 </div>
@@ -117,6 +109,7 @@ button {
 <form onsubmit="sendTelegram(); return false;">
   <input type="text" id="name" placeholder="Ваше імʼя" required>
   <input type="tel" id="phone" placeholder="Контактний телефон" required>
+  <input type="email" id="email" placeholder="Email (необовʼязково)">
   <button type="submit">Залишити заявку</button>
 </form>
 
@@ -136,27 +129,34 @@ button {
 function sendTelegram() {
   var name = document.getElementById('name').value;
   var phone = document.getElementById('phone').value;
+  var email = document.getElementById('email').value || "не вказано";
 
   var text =
-`🟦 FB ЗАЯВКА
+`🛒 НОВЕ ЗАМОВЛЕННЯ
 
 👤 Імʼя: ${name}
 📞 Телефон: ${phone}
+📧 Email: ${email}
 💡 LED лампа 9W
 💰 399 грн / 2 шт`;
 
-  var token = "8298483323:AAFt2eWhFACEBpFYsqBdf2VHHweGS69w-eY";
+  var token = "8460135552:AAGLe80zj85K5viD0t9IV9FmkLwvLxV-GoE";
   var chat_id = "2101279913";
 
   var url = "https://api.telegram.org/bot" + token +
             "/sendMessage?chat_id=" + chat_id +
             "&text=" + encodeURIComponent(text);
 
-  fetch(url).then(() => {
-    alert("Дякуємо! Ми звʼяжемося з вами найближчим часом.");
-    document.getElementById('name').value = "";
-    document.getElementById('phone').value = "";
-  });
+  fetch(url)
+    .then(() => {
+      alert("Дякуємо! Заявка прийнята ✅");
+      document.getElementById('name').value = "";
+      document.getElementById('phone').value = "";
+      document.getElementById('email').value = "";
+    })
+    .catch(() => {
+      alert("Помилка відправки. Спробуйте ще раз.");
+    });
 }
 </script>
 

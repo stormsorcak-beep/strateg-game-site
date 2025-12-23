@@ -41,9 +41,6 @@ img {
   font-size: 17px;
   margin-bottom: 10px;
 }
-ul {
-  padding-left: 18px;
-}
 form {
   padding: 20px;
 }
@@ -91,30 +88,23 @@ button {
 </div>
 
 <div class="block">
-  <h2>Основні характеристики</h2>
-  <ul>
-    <li>Потужність: 9W</li>
-    <li>Цоколь: E27</li>
-    <li>Вбудований акумулятор</li>
-    <li>Автоматичне вмикання при зникненні світла</li>
-    <li>Ресурс до 30 000 годин</li>
-  </ul>
-</div>
-
-<div class="block">
   <h2>Залишити заявку</h2>
-  <p>Менеджер звʼяжеться з вами для підтвердження замовлення</p>
+  <p>Заповніть дані для доставки Новою Поштою</p>
 </div>
 
 <form onsubmit="sendTelegram(); return false;">
-  <input type="text" id="name" placeholder="Ваше імʼя" required>
-  <input type="tel" id="phone" placeholder="Контактний телефон" required>
-  <input type="email" id="email" placeholder="Email (необовʼязково)">
+  <input type="text" id="name" placeholder="Імʼя" required>
+  <input type="text" id="surname" placeholder="Прізвище" required>
+  <input type="tel" id="phone" placeholder="Телефон" required>
+  <input type="text" id="city" placeholder="Місто" required>
+  <input type="text" id="settlement" placeholder="Населений пункт" required>
+  <input type="text" id="np" placeholder="Відділення Нової Пошти" required>
+
   <button type="submit">Залишити заявку</button>
 </form>
 
 <div class="trust">
-  ✔️ Доставка по Україні<br>
+  ✔️ Доставка Новою Поштою<br>
   ✔️ Оплата при отриманні<br>
   ✔️ Перевірка товару перед оплатою
 </div>
@@ -128,15 +118,24 @@ button {
 <script>
 function sendTelegram() {
   var name = document.getElementById('name').value;
+  var surname = document.getElementById('surname').value;
   var phone = document.getElementById('phone').value;
-  var email = document.getElementById('email').value || "не вказано";
+  var city = document.getElementById('city').value;
+  var settlement = document.getElementById('settlement').value;
+  var np = document.getElementById('np').value;
 
   var text =
 `🛒 НОВЕ ЗАМОВЛЕННЯ
 
 👤 Імʼя: ${name}
+👤 Прізвище: ${surname}
 📞 Телефон: ${phone}
-📧 Email: ${email}
+
+🚚 Доставка Новою Поштою:
+🏙 Місто: ${city}
+🏘 Населений пункт: ${settlement}
+📦 Відділення: ${np}
+
 💡 LED лампа 9W
 💰 399 грн / 2 шт`;
 
@@ -150,9 +149,7 @@ function sendTelegram() {
   fetch(url)
     .then(() => {
       alert("Дякуємо! Заявка прийнята ✅");
-      document.getElementById('name').value = "";
-      document.getElementById('phone').value = "";
-      document.getElementById('email').value = "";
+      document.querySelector("form").reset();
     })
     .catch(() => {
       alert("Помилка відправки. Спробуйте ще раз.");
